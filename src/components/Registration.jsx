@@ -3,7 +3,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 
 function Registration() {
 
-  const {createUser} = useContext(AuthContext)
+  const {createUser,user} = useContext(AuthContext)
 
 
   const handleSignUpForm = (event) => {
@@ -72,6 +72,7 @@ function Registration() {
           </form>
         </div>
       </div>
+      <h2>Your Email:{user?.email}</h2>
     </div>
   );
 }

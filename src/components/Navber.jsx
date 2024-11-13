@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 function Navber() {
+  const { userSignOut, user } = useContext(AuthContext);
   const linkCenter = (
     <>
       <li>
@@ -14,14 +17,31 @@ function Navber() {
       </li>
     </>
   );
+  const hundleSignout = () => {
+    userSignOut()
+      .then(() => {
+        console.log("Sign Out Done Successfully");
+      })
+      .catch((error) => {
+        console.log("Error", error.message);
+      });
+  };
   const linkEnd = (
     <>
-      <li className="btn btn-secondary">
-        <NavLink to="/SignIn">Sign In</NavLink>
-      </li>
-      <li className="btn btn-secondary">
-        <NavLink to="/SignUp">Sign Up</NavLink>
-      </li>
+      {user ? (
+        <li onClick={hundleSignout} className="btn btn-secondary">
+          <NavLink to="signIn">Sign Out</NavLink>
+        </li>
+      ) : (
+        <>
+          <li className="btn btn-secondary">
+            <NavLink to="/SignIn">Sign In</NavLink>
+          </li>
+          <li className="btn btn-secondary">
+            <NavLink to="/SignUp">Sign Up</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
