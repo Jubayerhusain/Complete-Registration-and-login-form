@@ -6,7 +6,14 @@ import { Navigate } from "react-router-dom";
 
 function PrivateRoute({children}) {
     // const navigate =  useNavigate()
-    const {user} = useContext(AuthContext)
+    const {user, loading} = useContext(AuthContext)
+    if (loading) {
+        return (
+            <div className="text-center mt-9">
+                <span className="loading loading-spinner text-error text-3xl"></span>
+            </div>
+        )
+    }
     if (user) {
         return children;
     }

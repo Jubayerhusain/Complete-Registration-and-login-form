@@ -1,7 +1,9 @@
+import {useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useContext } from 'react';
 function Login() {
   const {loginUser} = useContext(AuthContext)
+  const navigate = useNavigate()
   const hundleLogin = (event) =>{
     event.preventDefault()
     const email = event.target.email.value;
@@ -12,6 +14,7 @@ function Login() {
     loginUser(email, password)
     .then(res => {
       console.log(res.user);
+      navigate('/profile')
     })
     .catch(error =>{
       console.log("ERROR", error.message);
