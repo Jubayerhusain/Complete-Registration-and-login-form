@@ -15,6 +15,11 @@ function Navber() {
       <li>
         <NavLink to="/contactUs">Contact Us</NavLink>
       </li>
+      {
+        user && <li>
+        <NavLink to="/profile">Profile</NavLink>
+      </li>
+      }
     </>
   );
   const hundleSignout = () => {

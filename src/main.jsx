@@ -9,6 +9,8 @@ import About from "./Pages/About";
 import ContuctUs from "./Pages/ContuctUs";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
+import Profile from "./Pages/Profile";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,13 +29,21 @@ const router = createBrowserRouter([
         element: <ContuctUs></ContuctUs>,
       },
       {
-        path:'signIn',
-        element:<Login></Login>
+        path: "signIn",
+        element: <Login></Login>,
       },
       {
-        path:'signUp',
-        element:<Registration></Registration>
-      }
+        path: "signUp",
+        element: <Registration></Registration>,
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);
