@@ -1,8 +1,8 @@
-import {useNavigate } from "react-router-dom";
+import {Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useContext } from 'react';
 function Login() {
-  const {loginUser} = useContext(AuthContext)
+  const {loginUser,handleGoogleSignIn} = useContext(AuthContext)
   const navigate = useNavigate()
   const hundleLogin = (event) =>{
     event.preventDefault()
@@ -20,13 +20,24 @@ function Login() {
       console.log("ERROR", error.message);
     })
   }
+  // sign in  with  google
+  const hundleSignInWithGoogle = () =>{
+    handleGoogleSignIn()
+    .then((result)=>{
+      console.log(result.user);
+      Navigate('/profile')
+    })
+    .catch(error=>{
+      console.log("ERROR", error.message);
+    })
+  }
   return (
     <div className="bg-base-200 py-20">
       <div className="hero-content flex-col">
         <div className="text-center lg:text-left">
           <h1 className="text-3xl font-bold text-center">Sign In now!</h1>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl pb-10">
           <form onSubmit={hundleLogin} className="card-body">
             <div className="form-control">
               <label className="label">
@@ -61,6 +72,7 @@ function Login() {
               <button className="btn btn-primary">Sign In</button>
             </div>
           </form>
+          <p onClick={hundleSignInWithGoogle} className="btn w-10/12 mx-auto">Sign In With Google</p>
         </div>
       </div>
     </div>

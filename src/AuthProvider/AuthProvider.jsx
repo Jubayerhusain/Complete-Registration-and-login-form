@@ -2,8 +2,10 @@
 /* eslint-disable react/prop-types */
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
@@ -44,11 +46,17 @@ function AuthProvider({ children }) {
     setLoading(true)
     return signOut(auth);
   };
+  // add Google auth provider system
+  const googleProvider = new GoogleAuthProvider()
+  const handleGoogleSignIn = () =>{
+    return signInWithPopup(auth, googleProvider)
+  }
   // make a object for all user context
   const authInfo = {
     createUser,
     loginUser,
     userSignOut,
+    handleGoogleSignIn,
     loading,
     user,
   };
